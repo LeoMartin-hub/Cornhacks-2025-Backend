@@ -20,3 +20,4 @@ key = encrypt.key
 encrypted_package = encrypt_package(package)
 print(encrypted_package.get_encrypted_message())
 print(encrypted_package.get_encrypted_image())
+print(key)

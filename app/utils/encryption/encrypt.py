@@ -2,6 +2,7 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import base64
 
+#Generates 16-byte AES key
 key = get_random_bytes(16)
 
 def encrypt_data(data, key):
