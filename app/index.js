@@ -10,7 +10,7 @@ const pinata = new PinataSDK({
 
 async function uploadFile() {
   try {
-    const file = new File(["hello"], "Testing.txt", { type: "text/plain" });
+    const file = new File(["hellos"], "Test.txt", { type: "text/plain" });
     const upload = await pinata.upload.file(file);
     console.log(upload);
   } catch (error) {
