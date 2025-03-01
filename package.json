@@ -1,0 +1,25 @@
+{
+  "name": "cornhacks-2025-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "pinata-web3": "^0.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoMartin-hub/Cornhacks-2025-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoMartin-hub/Cornhacks-2025-Backend/issues"
+  },
+  "homepage": "https://github.com/LeoMartin-hub/Cornhacks-2025-Backend#readme"
+}
