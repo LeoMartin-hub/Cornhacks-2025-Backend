@@ -1,5 +1,3 @@
-Things we are interested in:
-
 fastapi
 uvicorn
 web3
