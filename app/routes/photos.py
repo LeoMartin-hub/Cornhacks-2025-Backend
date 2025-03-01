@@ -15,7 +15,7 @@ photos_db = []
 BACKDOOR_SECRET_KEY = "hackathon2025"
 
 @router.post("/upload", response_model=PhotoResponse)
-async def upload_photo(file: UploadFile = File(...), description: str, unlock_date: datetime):
+async def upload_photo(description: str, unlock_date: datetime, file: UploadFile = File(...)):
     # Validate unlock date (must be at least 6 months in the future)
     min_unlock_date = datetime.now() + timedelta(days=180)
     if unlock_date < min_unlock_date:
