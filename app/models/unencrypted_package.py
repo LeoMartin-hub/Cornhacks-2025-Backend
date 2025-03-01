@@ -1,5 +1,5 @@
 import encrypted_package
-import encrypt
+from encryption import encrypt
 
 class UnencryptedPackage:
     def _init_(self, message, image, date, time):
