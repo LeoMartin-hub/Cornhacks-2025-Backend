@@ -3,7 +3,7 @@ from Crypto.Random import get_random_bytes
 import base64
 import encrypt
 
-key = get_random_bytes(16)
+key = encrypt.key
 
 def decrypt_data(encrypted_data, key):
     data = base64.b64decode(encrypted_data)
