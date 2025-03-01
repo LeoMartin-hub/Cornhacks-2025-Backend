@@ -1,9 +1,9 @@
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import base64
-import encrypt
+from . import encrypt  # Ensure the correct relative import
 
-key = encrypt.key
+key = get_random_bytes(16)
 
 def decrypt_data(encrypted_data, key):
     data = base64.b64decode(encrypted_data)
