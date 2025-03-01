@@ -25,13 +25,13 @@ async def upload_photo(
     # Read the uploaded file
     file_data = await file.read()
 
-    # Encrypt the photo
-    encrypted_data = encrypt_data(file_data, key)
+    # Encrypt the photo and retrieve the key
+    encrypted_data, key = encrypt_data(file_data)
 
     # Save the encrypted photo to storage
     file_path = f"app/storage/{file.filename}.enc"
     with open(file_path, "wb") as f:
-        f.write(encrypted_data.encode())
+        f.write(encrypted_data)
 
     # Store the encryption key on the blockchain
     transaction_hash = store_key_on_blockchain(key.hex(), unlock_date)
