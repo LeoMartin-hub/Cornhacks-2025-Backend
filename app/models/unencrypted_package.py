@@ -1,8 +1,5 @@
-import encrypted_package
-from encryption import encrypt
-
 class UnencryptedPackage:
-    def _init_(self, message, image, date, time):
+    def __init__(self, message, image, date, time):
         self.message = message
         self.image = image
         self.date = date
@@ -31,8 +28,3 @@ class UnencryptedPackage:
     
     def set_time(self, time):
         self.time = time
-
-    def encrypt_package(self, key):
-        encrypted_message = encrypt.encrypt_data(self.message, key)
-        encrypted_image = encrypt.encrypt_data(self.image, key)
-        return encrypted_package.EncryptedPackage(encrypted_message, encrypted_image, self.date, self.time)
