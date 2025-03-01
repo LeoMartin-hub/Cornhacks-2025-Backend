@@ -1,0 +1,8 @@
+Things we are interested in:
+
+fastapi
+uvicorn
+web3
+python-multipart
+cryptography
+requests
