@@ -8,6 +8,10 @@ import encrypted_package
 from app.utils.encryption import decrypt
 
 def decrypt_package(encrypted_package):
-    decrypted_message = encrypted_package.decrypt_data(encrypted_package.encrypted_message, decrypt.key)
-    decrypted_image = decrypt.decrypt_data(encrypted_package.encrypted_image, decrypt.key)
-    return unencrypted_package.UnencryptedPackage(decrypted_message, decrypted_image, encrypted_package.date, encrypted_package.time)
+    if not encrypted_package.past_unlock_time():
+        print(f"File is not ready for decryption. Unlock time is {encrypted_package.date} at {encrypted_package.time}")
+        return None
+    else:
+        decrypted_message = encrypted_package.decrypt_data(encrypted_package.encrypted_message, decrypt.key)
+        decrypted_image = decrypt.decrypt_data(encrypted_package.encrypted_image, decrypt.key)
+        return unencrypted_package.UnencryptedPackage(decrypted_message, decrypted_image, encrypted_package.date, encrypted_package.time)
