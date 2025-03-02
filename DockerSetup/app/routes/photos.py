@@ -1,9 +1,10 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Form
 from datetime import datetime, timedelta
-from app.models.photo import PhotoUpload, PhotoResponse
+from Crypto.Random import get_random_bytes
+from app.models.photo import PhotoResponse
 from app.encryption.encrypt import encrypt_data
 from app.encryption.decrypt import decrypt_data
-from app.utils.blockchain import store_key_on_blockchain
+#from app.index import store_key_on_blockchain
 import os
 from uuid import uuid4
 
@@ -54,7 +55,7 @@ async def upload_photo(
         raise HTTPException(status_code=500, detail=f"Failed to save file: {str(e)}")
 
     # Store the encryption key on the blockchain
-    transaction_hash = store_key_on_blockchain(key.hex(), unlock_date)
+    # transaction_hash = store_key_on_blockchain(key.hex(), unlock_date)
 
     # Save photo metadata to the database
     photo = {
@@ -63,7 +64,7 @@ async def upload_photo(
         "file_path": file_path,
         "unlock_date": unlock_date,
         "is_public": False,
-        "transaction_hash": transaction_hash,
+        #"transaction_hash": transaction_hash,
     }
     photos_db.append(photo)
 
