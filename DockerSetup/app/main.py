@@ -1,30 +1,34 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.photos import router as photos_router
 
+
+
+
 app = FastAPI()
 
-# Configure allowed origins (adjust as needed)
 origins = [
-    "http://localhost:5173",  # For SvelteKit during development
-    "http://localhost:3000",  # Alternative dev environment
-    "*",
-    
+    "http://localhost:3000",  # Replace with your SvelteKit app's origin
 ]
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,           # Allow specified origins
-    allow_credentials=True,          # Allow cookies/auth headers
-    allow_methods=["*"],             # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],             # Allow all headers
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Include routes
-app.include_router(photos_router, prefix="/api")
+@app.post("/api/upload")
+async def upload_file(
+    file: UploadFile = File(...),
+    email: str = Form(...),
+    time: str = Form(...),
+    message: str = Form(...)
+):
+    # Process the uploaded file and other form data
+    return {"filename": file.filename, "email": email, "time": time, "message": message}
 
 @app.get("/")
 def read_root():
-    print("Welcome to the Time Capsule API!")
-    return {"message": "Welcome to the Time Capsule API!"}
+    return {"Hello": "World"}
