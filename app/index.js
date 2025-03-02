@@ -1,7 +1,7 @@
 import { PinataSDK } from "pinata-web3";
 import dotenv from "dotenv";
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.PINATA_JWT,
@@ -10,27 +10,62 @@ const pinata = new PinataSDK({
 
 async function uploadFile() {
   try {
-    const file = new File(["hellos"], "Test.txt", { type: "text/plain" });
+    const file = new File(["hellos"], "Testsdrfkg.txt", { type: "text/plain" });
     const upload = await pinata.upload.file(file);
-    console.log(upload);
+    console.log("Upload successful:", upload);
+    return upload.IpfsHash; 
   } catch (error) {
     console.log("Upload Error:", error);
+    return null;
   }
 }
 
-// Add the fetchFile function to retrieve a file by CID
-async function fetchFile() {
+async function fetchFile(cid) {
   try {
-    const cid = "bafkreibm6jg3ux5qumhcn2b3flc3tyu6dmlb4xa7u5bf44yegnrjhc4yeq"; // Example CID
-    const data = await pinata.gateways.get(cid);
-    console.log("File Retrieved:", data);  // Logs the retrieved file data
+    if (!cid) {
+      throw new Error("CID is required");
+    }
+    
+    // Direct gateway URL format
+    const gatewayUrl = process.env.PINATA_GATEWAY || "https://gateway.pinata.cloud";
+    
+
+    const url = new URL(`${gatewayUrl}/ipfs/${cid}`);
+    
+    console.log(`Attempting to fetch from: ${url.toString()}`);
+    
+    const response = await fetch(url.toString());
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.text();
+    console.log("File Retrieved:", data);
+    return data;
   } catch (error) {
-    console.log("Fetch Error:", error);  // Error handling for fetch
+    console.log("Fetch Error:", error);
+    
+    // More detailed error handling
+    if (error.message.includes("401")) {
+      console.log("Authentication issue. Please check your JWT token and gateway permissions.");
+    } else if (error.message.includes("404")) {
+      console.log("Content not found. The CID might not exist or might be private.");
+    }
   }
 }
 
-// Uncomment to upload a file
-uploadFile();
+async function main() {
 
-// Fetch the file after uploading (if you need to test both)
-//fetchFile();
+    const uploadedCid = await uploadFile();
+    console.log("Uploaded CID:", uploadedCid);
+    
+    console.log("Waiting for content to propagate...");
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    if (uploadedCid) {
+      await fetchFile(uploadedCid);
+    }
+}
+
+main();
