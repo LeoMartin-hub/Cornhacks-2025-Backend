@@ -8,6 +8,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",  # For SvelteKit during development
     "http://localhost:3000",  # Alternative dev environment
+    "*"
 ]
 
 # Add CORS middleware
@@ -24,4 +25,5 @@ app.include_router(photos_router, prefix="/api")
 
 @app.get("/")
 def read_root():
+    print("Welcome to the Time Capsule API!")
     return {"message": "Welcome to the Time Capsule API!"}
