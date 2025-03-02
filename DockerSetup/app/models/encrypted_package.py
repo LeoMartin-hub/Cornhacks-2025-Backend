@@ -1,3 +1,5 @@
+import datetime
+
 class EncryptedPackage:
     def __init__(self, encrypted_message, encrypted_image, date, time):
         self.encrypted_message = encrypted_message
@@ -28,6 +30,15 @@ class EncryptedPackage:
     
     def set_time(self, time):
         self.time = time
+
+    def past_unlock_time(self):
+        if (self.date < datetime.now().date()):
+            return True
+        elif (self.date == datetime.now().date() and self.time < datetime.now().time()):
+            return True
+        else: 
+            return False
+        
 
 
         
