@@ -8,7 +8,8 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",  # For SvelteKit during development
     "http://localhost:3000",  # Alternative dev environment
-    "*"
+    "*",
+    
 ]
 
 # Add CORS middleware
