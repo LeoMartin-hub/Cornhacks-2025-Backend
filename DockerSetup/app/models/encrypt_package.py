@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
 
 import unencrypted_package
 import encrypted_package
-from app.utils.encryption import encrypt
+from DockerSetup.app.encryption import encrypt
 
 def encrypt_package(unencrypted_package):
     encrypted_message = encrypt.encrypt_data(unencrypted_package.message.encode(), encrypt.key)

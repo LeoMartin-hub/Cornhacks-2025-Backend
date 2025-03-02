@@ -1,9 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Form
 from datetime import datetime, timedelta
-from Crypto.Random import get_random_bytes
-from DockerSetup.app.models.photo import PhotoUpload, PhotoResponse
-from DockerSetup.app.encryption.encrypt import encrypt_data
-from DockerSetup.app.encryption.decrypt import decrypt_data
+from app.models.photo import PhotoUpload, PhotoResponse
+from app.encryption import encrypt_data, decrypt_data
 from app.utils.blockchain import store_key_on_blockchain
 import os
 from uuid import uuid4
