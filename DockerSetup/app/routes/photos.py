@@ -1,7 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Form
 from datetime import datetime, timedelta
 from app.models.photo import PhotoUpload, PhotoResponse
-from app.encryption import encrypt_data, decrypt_data
+from app.encryption.encrypt import encrypt_data
+from app.encryption.decrypt import decrypt_data
 from app.utils.blockchain import store_key_on_blockchain
 import os
 
