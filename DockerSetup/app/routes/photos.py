@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from app.models.photo import PhotoUpload, PhotoResponse
 from app.encryption.encrypt import encrypt_data
 from app.encryption.decrypt import decrypt_data
-from app.utils.blockchain import store_key_on_blockchain
+# from app.utils.blockchain import store_key_on_blockchain
 import os
 
 router = APIRouter()
@@ -35,7 +35,7 @@ async def upload_photo(
         f.write(encrypted_data)
 
     # Store the encryption key on the blockchain
-    transaction_hash = store_key_on_blockchain(key.hex(), unlock_date)
+    # transaction_hash = store_key_on_blockchain(key.hex(), unlock_date)
 
     # Save photo metadata to the database
     photo = {
