@@ -32,3 +32,7 @@ async def upload_file(
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.get("/api/upload")
+def read_root():
+    return {"Hello": "World"}
